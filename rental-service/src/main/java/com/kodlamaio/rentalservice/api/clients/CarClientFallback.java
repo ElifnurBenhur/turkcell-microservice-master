@@ -19,7 +19,7 @@ public class CarClientFallback implements CarClient {
 
     //@Scheduled(fixedRate = 5000)
     @Override
-    @Retry(name = "inventorySearch")
+
     public ClientResponse checkIfCarAvailable(UUID carId) {
         log.info("INVENTORY SERVICE IS DOWN!");
         throw new RuntimeException("INVENTORY SERVICE IS DOWN!");
