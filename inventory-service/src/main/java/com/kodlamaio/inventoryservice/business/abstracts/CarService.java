@@ -19,5 +19,6 @@ public interface CarService {
     UpdateCarResponse update(UUID id, UpdateCarRequest request);
     void delete(UUID id);
     ClientResponse checkIfCarAvailable(UUID id);
+    ClientResponse checkIfCarAvailableForMaintenance(UUID id);
     void changeStateByCarId(State state, UUID id);
 }

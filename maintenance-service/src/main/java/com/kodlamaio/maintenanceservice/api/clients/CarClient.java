@@ -1,4 +1,4 @@
-package com.kodlamaio.rentalservice.api.clients;
+package com.kodlamaio.maintenanceservice.api.clients;
 
 import com.kodlamaio.commonpackage.utils.dto.ClientResponse;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -12,4 +12,7 @@ import java.util.UUID;
 public interface CarClient {
     @GetMapping(value = "/api/cars/check-car-available/{carId}")
     ClientResponse checkIfCarAvailable(@PathVariable UUID carId);
+    @GetMapping("/check-car-available-for-maintenance/{id}")
+    ClientResponse checkIfCarAvailableForMaintenance(@PathVariable UUID carId);
+
 }

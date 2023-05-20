@@ -25,4 +25,16 @@ public class CarBusinessRules {
             throw new BusinessException("CAR_NOT_AVAILABLE");
         }
     }
+    public void checkIfCarUnderMaintenance(UUID id){
+        var car = repository.findById(id).orElseThrow();
+        if (car.getState().equals(State.Maintenance)) {
+            throw new BusinessException("CAR_ALREADY_UNDER_MAINTENANCE");
+        }
+    }
+    public void checkIfCarRented(UUID id){
+        var car = repository.findById(id).orElseThrow();
+        if (car.getState().equals(State.Rented)) {
+            throw new BusinessException("CAR_IS_CURRENTLY_RENTED_AND_CAN_NOT_BE_SERVICED_FOR_MAINTENANCE");
+        }
+    }
 }

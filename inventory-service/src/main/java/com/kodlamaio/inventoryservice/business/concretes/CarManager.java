@@ -90,6 +90,15 @@ public class CarManager implements CarService {
     }
 
     @Override
+    public ClientResponse checkIfCarAvailableForMaintenance(UUID id) {
+        var response = new ClientResponse();
+        validateCarAvailabilityForMaintenance(id, response);
+        return response;
+    }
+
+
+
+    @Override
     public void changeStateByCarId(State state, UUID id) {
         repository.changeStateByCarId(state, id);
     }
@@ -113,4 +122,16 @@ public class CarManager implements CarService {
             response.setMessage(exception.getMessage());
         }
     }
+    private void validateCarAvailabilityForMaintenance(UUID id, ClientResponse response) {
+        try {
+            rules.checkIfCarExists(id);
+            rules.checkIfCarUnderMaintenance(id);
+            rules.checkIfCarRented(id);
+            response.setSuccess(true);
+        } catch (BusinessException exception) {
+            response.setSuccess(false);
+            response.setMessage(exception.getMessage());
+        }
+    }
+
 }
